@@ -18,18 +18,19 @@ import {
 
 import {
   Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { RestaurantPicker } from './restaurant-picker/restaurant-picker';
+import {RestaurantPicker} from './restaurant-picker/restaurant-picker';
+import {RestaurantPickerService} from './restaurant-picker/restaurant-picker.service';
 
 const App: React.FC = () => {
   const parentProps = {
     name: 'Jamie',
-    number: 14
-  }
+    number: 14,
+  };
+
+  let pickerService = new RestaurantPickerService();
+  let results = pickerService.getRestaurantsByZip('83709', 1);
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -45,32 +46,10 @@ const App: React.FC = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <RestaurantPicker props={parentProps}></RestaurantPicker>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
+              <RestaurantPicker
+                name={parentProps.name}
+                number={parentProps.number}></RestaurantPicker>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
